@@ -1,0 +1,69 @@
+﻿@page
+@model ChartTest.Pages.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details for @Model.Title</h1>
+
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.TheItems[0].Name)</th>
+
+            @if (Model.QueryType != "M")
+            {
+                <th>@Html.DisplayNameFor(m => m.TheItems[0].Manufacturer)</th>
+            }
+
+
+            @if (Model.QueryType != "L")
+            {
+                <th>@Html.DisplayNameFor(m => m.TheItems[0].LocationName)</th>
+            }
+
+            @if (Model.QueryType != "T")
+            {
+                <th>@Html.DisplayNameFor(m => m.TheItems[0].vType)</th>
+            }
+
+            @if (Model.QueryType != "C")
+            {
+                <th>@Html.DisplayNameFor(m => m.TheItems[0].vClass)</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach( var ci in Model.TheItems)
+        {
+            <tr>
+                <td>@Html.DisplayFor(n => ci.Name)</td>
+
+                @if(Model.QueryType != "M")
+                {
+                    <td>@Html.DisplayFor(n => ci.Manufacturer)</td>
+                }
+
+                @if (Model.QueryType != "L")
+                {
+                    <td>@Html.DisplayFor(n => ci.LocationName)</td>
+                }
+            
+                @if (Model.QueryType != "T")
+                {
+                    <td>@Html.DisplayFor(n => ci.vType)</td>
+                }
+
+                @if (Model.QueryType != "C")
+                {
+                    <td>@Html.DisplayFor(n => ci.vClass)</td>
+                }
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">There are @Model.TheItems.Count items found</td>
+        </tr>
+    </tfoot>
+</table>

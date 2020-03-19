@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>    
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(m => m.MasterList[0].Name)</th>
+                        <th>@Html.DisplayNameFor(m => m.MasterList[0].Manufacturer)</th>
+                        <th>@Html.DisplayNameFor(m => m.MasterList[0].LocationName)</th>
+                        <th>@Html.DisplayNameFor(m => m.MasterList[0].vType)</th>
+                        <th>@Html.DisplayNameFor(m => m.MasterList[0].vClass)</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ci in Model.MasterList)
+                    {
+                        <tr>
+                            <td><span class="toolTip" data-toggle="tooltip" data-placement="top" data-html="true" title="Insured: @ci.isInsured.ToString() <br/> Modded: @ci.isMod.ToString()">@Html.DisplayFor(n => ci.Name)</span></td>
+                            <td>@Html.DisplayFor(n => ci.Manufacturer)</td>
+                            <td>@Html.DisplayFor(n => ci.LocationName)</td>
+                            <td>@Html.DisplayFor(n => ci.vType)</td>
+                            <td>@Html.DisplayFor(n => ci.vClass)</td>                            
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">There are @Model.MasterList.Count() vehicles in my collection</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <ul class="list-unstyled">
+                <li style="margin-top: 5px;"><a class="btn btn-info" asp-page="./Chart" asp-route-id="M">Manufacturers</a></li>
+                <li style="margin-top: 5px;"><a class="btn btn-info" asp-page="./Chart" asp-route-id="L">Locations</a></li>
+                <li style="margin-top: 5px;"><a class="btn btn-info" asp-page="./Chart" asp-route-id="C">Classes</a></li>
+                <li style="margin-top: 5px;"><a class="btn btn-info" asp-page="./Chart" asp-route-id="T">Types</a></li>
+            </ul>            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@page
+@model ChartTest.Pages.ChartModel
+@{
+    ViewData["Title"] = "Chart";
+}
+
+<h1>Breakdown of Owned Vehicles by: @Model.Title</h1>
+
+@if (Model.TheStats != null)
+{
+    <div>
+        <ejs-accumulationchart id="container" title="@Model.Title">
+            <e-accumulationchart-tooltipsettings enable="true"></e-accumulationchart-tooltipsettings>
+            <e-accumulationchart-legendsettings visible="false" position="Bottom"></e-accumulationchart-legendsettings>
+            <e-accumulation-series-collection>
+                <e-accumulation-series dataSource="@Model.TheStats.OrderByDescending(q => q.yValue)" xName="xValue" yName="yValue" name="@Model.Title" radius="100%" innerRadius="20%">
+                    <e-accumulationseries-datalabel name="xValue" visible="false" position="Outside"></e-accumulationseries-datalabel>
+                </e-accumulation-series>
+            </e-accumulation-series-collection>
+        </ejs-accumulationchart>
+    </div>
+
+    <div>
+        <ejs-chart id="container1" title="@Model.Title" width="100%">
+            <e-chart-tooltipsettings enable="true"></e-chart-tooltipsettings>
+            <e-chart-primaryxaxis valueType="Category" labelFormat="y" edgeLabelPlacement="Shift"></e-chart-primaryxaxis>
+            <e-series-collection>
+                <e-series dataSource="@Model.TheStats.OrderByDescending(q => q.yValue)" name="@Model.Title" xName="xValue" width="2" opacity="1" yName="yValue" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Column"></e-series>
+            </e-series-collection>
+        </ejs-chart>
+    </div>
+
+
+    <h6 class="text-muted">Mouse over chart for details</h6>
+    <hr />
+
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.TheStats[0].xValue)</th>
+                <th>@Html.DisplayNameFor(m => m.TheStats[0].yValue)</th>
+            </tr>
+        </thead>
+        @foreach(var ci in Model.TheStats.OrderByDescending(y => y.yValue))
+        {
+            <tr>
+                <td><a asp-page="./Details" asp-route-id="@Model.QueryType|@ci.xValue">@Html.DisplayFor(m => ci.xValue)</a></td>
+                <td>@Html.DisplayFor(m => ci.yValue)</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <strong>No data present</strong>
+}
