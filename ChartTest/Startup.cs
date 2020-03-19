@@ -30,8 +30,6 @@ namespace ChartTest
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //MjI0NzI0QDMxMzcyZTM0MmUzMGpqekhjYitVaC9ucGVtL0hrd3pOV3BzdVAveGhSdUw5bWJBS1YrRkZIQjg9
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
